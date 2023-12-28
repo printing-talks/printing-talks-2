@@ -1,0 +1,19 @@
+---
+interface Props {
+  title?: string | undefined;
+  desc?: string | undefined;
+}
+
+const {
+  title = "Printing Talks: Abu Dhabi's Leading Printing and Packaging Factory",
+  desc = "Welcome to Printing Talks",
+} = Astro.props;
+---
+
+<meta charset="UTF-8" />
+<meta name="description" property="og:description" content={desc} />
+<meta name="viewport" content="width=device-width" />
+<meta name="generator" content={Astro.generator} />
+<title>{title}</title>
+
+<link rel="icon" type="image/webp" href="/favicon.webp" />

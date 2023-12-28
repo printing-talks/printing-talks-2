@@ -1,0 +1,36 @@
+---
+import { getCollection } from "astro:content";
+
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+import Hero from "../components/Hero.astro";
+import Grid from "../components/Grid.astro";
+import PortfolioPreview from "../components/PortfolioPreview.astro";
+
+const products = (await getCollection("products")).sort(
+  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
+);
+---
+
+<BaseLayout
+  title="My Work | Jeanine White"
+  desc="Learn about Jeanine White's most recent products"
+>
+  <div class="stack gap-20">
+    <main class="wrapper stack gap-8">
+      <Hero
+        title="My Work"
+        tagline="See my most recent products below to get an idea of my past experience."
+      />
+      <Grid variant="offset">
+        {
+          products.map((product) => (
+            <li>
+              <PortfolioPreview product={product} />
+            </li>
+          ))
+        }
+      </Grid>
+    </main>
+  </div>
+</BaseLayout>
