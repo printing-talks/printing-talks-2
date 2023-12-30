@@ -1,4 +1,5 @@
 ---
+import Footer from "../components/Footer.astro";
 import MainHead from "../components/MainHead.astro";
 import Nav from "../components/Nav.astro";
 interface Props {
@@ -17,6 +18,32 @@ const { title, desc } = Astro.props;
 	<body>
 		<Nav />
 		<slot />
-		<style></style>
+		<Footer />
+		<style is:global>
+			h1 {
+				@apply text-5xl;
+			}
+			h2 {
+				@apply text-4xl;
+			}
+			h3 {
+				@apply text-3xl;
+			}
+			h4 {
+				@apply text-2xl;
+			}
+			h5 {
+				@apply text-xl;
+			}
+			h6 {
+				@apply text-lg;
+			}
+			.wrapper {
+				width: 100%;
+				max-width: 83rem;
+				margin-inline: auto;
+				padding-inline: 1.5rem;
+			}
+		</style>
 	</body>
 </html>

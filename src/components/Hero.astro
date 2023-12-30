@@ -7,12 +7,10 @@ interface Props {
 const { tagline, title } = Astro.props;
 ---
 
-<div
-  class="hero p-6 flex flex-col gap-12 max-w-[83rem] mx-auto rounded-2xl bg-slate-600 justify-center"
->
+<div class="wrapper justify-center">
   <div class="hero-text flex flex-col">
-    <h1 class="title">{title}</h1>
-    {tagline && <p class="tagline">{tagline}</p>}
+    <h1 class="text-accent">{title}</h1>
+    {tagline && <p class="text-xl">{tagline}</p>}
   </div>
   <slot />
 </div>

@@ -4,6 +4,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Grid from "../components/Grid.astro";
 import Hero from "../components/Hero.astro";
 import PortfolioPreview from "../components/PortfolioPreview.astro";
+import Features from "../components/Features.astro";
 
 // Content Fetching: List four most recent work projects
 const products = (await getCollection("products"))
@@ -12,37 +13,56 @@ const products = (await getCollection("products"))
 ---
 
 <BaseLayout>
-	<header>
-		<Hero
-			title="Printing Talks"
-			tagline="Custom packaging that leaves an impact"
-		/>
-	</header>
-	<main>
-		<main class="wrapper stack gap-20 lg:gap-48">
-			<section class="section with-background with-cta">
-				<header class="section-header stack gap-2 lg:gap-4">
-					<h3>Selected Work</h3>
-					<p>
-						Take a look below at some of my featured work for clients from the
-						past few years.
-					</p>
-				</header>
-
-				<div class="gallery">
-					<Grid variant="offset">
-						{
-							products.map((product) => (
-								<li>
-									<PortfolioPreview product={product} />
-								</li>
-							))
-						}
-					</Grid>
-				</div>
-			</section>
+	<div class="flex flex-col gap-20 lg:gap-48">
+		<header>
+			<Hero
+				title="Printing Talks"
+				tagline="Custom packaging that leaves an impact"
+			/>
+		</header>
+		<main>
+			<main class="wrapper space-y-24">
+				<Features />
+				<section class="space-y-6">
+					<header class="flex justify-between items-center">
+						<div class="flex flex-col max-w-[50ch]">
+							<h3>Best Sellers</h3>
+							<p>
+								Explore our best selling products across a range of categories
+							</p>
+						</div>
+						<a class="justify-self-end" href="">View All</a>
+					</header>
+					<div class="gallery">
+						<Grid variant="offset">
+							{
+								products.map((product) => (
+									<li>
+										<PortfolioPreview product={product} />
+									</li>
+								))
+							}
+						</Grid>
+					</div>
+				</section>
+				<section id="testimonials">
+					<script
+						src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"
+					></script>
+					<header class="flex justify-between items-center">
+						<div class="flex flex-col max-w-[50ch]">
+							<h3>Testimonials</h3>
+							<p>Trust is at the core of everything we do</p>
+						</div>
+					</header>
+					<swiper-container slides-per-view="1">
+						<swiper-slide>Slide 1</swiper-slide>
+						<swiper-slide>Slide 2</swiper-slide>
+						<swiper-slide>Slide 3</swiper-slide>
+					</swiper-container>
+				</section>
+			</main>
 		</main>
-	</main>
-
+	</div>
 	<style></style>
 </BaseLayout>

@@ -13,16 +13,18 @@ const products = (await getCollection("products")).sort(
 ---
 
 <BaseLayout
-  title="My Work | Jeanine White"
+  title="Products | Printing Talks"
   desc="Learn about Jeanine White's most recent products"
 >
   <div class="stack gap-20">
     <main class="wrapper stack gap-8">
-      <Hero
-        title="My Work"
-        tagline="See my most recent products below to get an idea of my past experience."
-      />
-      <Grid variant="offset">
+      <section>
+        <header>
+          <Hero
+            title="Products"
+            tagline="Design and order a wide range of fully customisable packaging products for your brand."
+          />
+        </header>
         {
           products.map((product) => (
             <li>
@@ -30,7 +32,7 @@ const products = (await getCollection("products")).sort(
             </li>
           ))
         }
-      </Grid>
+      </section>
     </main>
   </div>
 </BaseLayout>
