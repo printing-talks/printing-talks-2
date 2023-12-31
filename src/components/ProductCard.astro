@@ -10,7 +10,7 @@ const { data, slug } = Astro.props.product;
 
 <a
   href={`/products/${slug}`}
-  class="card overflow-clip shadow-xl hover:shadow-2xl transition duration-300 rounded-xl bg-base-dark flex flex-col h-[11rem] md:h-[22rem]"
+  class="card overflow-clip shadow-lg hover:shadow-2xl transition duration-300 rounded-xl bg-base-dark flex flex-col h-[11rem] md:h-[22rem]"
 >
   <img
     class="image-scale"
@@ -31,10 +31,10 @@ const { data, slug } = Astro.props.product;
     height: 100%;
     object-fit: cover;
   }
-  .image-scale {
+  /* .image-scale {
     transition: transform 0.4s ease;
   }
   .card:hover .image-scale {
     transform: scale(1.05);
-  }
+  } */
 </style>

@@ -3,8 +3,10 @@ import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Grid from "../components/Grid.astro";
 import Hero from "../components/Hero.astro";
-import PortfolioPreview from "../components/PortfolioPreview.astro";
+import ProductCard from "../components/ProductCard.astro";
 import Features from "../components/Features.astro";
+import CallToAction from "../components/CallToAction.astro";
+import Nav from "../components/Nav.astro";
 
 // Content Fetching: List four most recent work projects
 const products = (await getCollection("products"))
@@ -14,7 +16,7 @@ const products = (await getCollection("products"))
 
 <BaseLayout>
 	<div class="flex flex-col gap-20 lg:gap-48">
-		<header>
+		<header class="w-full h-[100svh]">
 			<Hero
 				title="Printing Talks"
 				tagline="Custom packaging that leaves an impact"
@@ -31,14 +33,14 @@ const products = (await getCollection("products"))
 								Explore our best selling products across a range of categories
 							</p>
 						</div>
-						<a class="justify-self-end" href="">View All</a>
+						<CallToAction href="/products/">View All</CallToAction>
 					</header>
 					<div class="gallery">
 						<Grid variant="offset">
 							{
 								products.map((product) => (
 									<li>
-										<PortfolioPreview product={product} />
+										<ProductCard product={product} />
 									</li>
 								))
 							}
