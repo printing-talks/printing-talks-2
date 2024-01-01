@@ -6,11 +6,15 @@ import ProductCard from "../components/ProductCard.astro";
 import Features from "../components/Features.astro";
 import CallToAction from "../components/CallToAction.astro";
 import TestimonialCard from "../components/TestimonialCard.astro";
+import QuoteForm from "../components/QuoteForm";
 
 // Content Fetching: List four most recent work projects
-const products = (await getCollection("products"))
+const bestSellers = (await getCollection("products"))
 	.sort((a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf())
 	.slice(0, 4);
+
+const products = await getCollection("products");
+const testimonials = await getCollection("testimonials");
 ---
 
 <BaseLayout>
@@ -75,67 +79,89 @@ const products = (await getCollection("products"))
 			</div>
 		</header>
 
-		<main>
-			<main class="wrapper space-y-40">
-				<Features />
-				<section class="space-y-6">
-					<header class="flex justify-between items-center">
-						<div class="flex flex-col max-w-[50ch]">
-							<h3>Best Sellers</h3>
-							<p>
-								Explore our best selling products across a range of categories
-							</p>
-						</div>
-						<CallToAction href="/products/">View All</CallToAction>
-					</header>
-					<div class="gallery">
-						<Grid variant="offset">
-							{
-								products.map((product) => (
-									<li>
-										<ProductCard product={product} />
-									</li>
-								))
-							}
-						</Grid>
+		<main class="wrapper space-y-40">
+			<Features />
+			<section class="space-y-6">
+				<header class="flex justify-between items-center">
+					<div class="flex flex-col max-w-[50ch]">
+						<h3>Best Sellers</h3>
+						<p>
+							Explore our best selling bestSellers across a range of categories
+						</p>
 					</div>
-				</section>
-				<section id="testimonials">
-					<script
-						src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-element-bundle.min.js"
-					></script>
-					<header class="flex justify-between items-center">
-						<div class="flex flex-col max-w-[50ch]">
-							<h3>Testimonials</h3>
-							<p>Trust is at the core of everything we do</p>
-						</div>
-					</header>
-					<swiper-container slides-per-view="1">
-						<swiper-slide
-							><TestimonialCard
-								companyLogoPath="./assets/other-logos/neighborhood-logo.svg"
-								author="John Doe"
-								testimonialText="Printing Talks is our go-to, from printing posters, stickers and packages.They are always able to provide the required in a timely manner!"
-							/></swiper-slide
-						>
-						<swiper-slide
-							><TestimonialCard
-								companyLogoPath="./assets/other-logos/neighborhood-logo.svg"
-								author="John Doe"
-								testimonialText="Printing Talks is our go-to, from printing posters, stickers and packages.They are always able to provide the required in a timely manner!"
-							/></swiper-slide
-						>
-						<swiper-slide
-							><TestimonialCard
-								companyLogoPath="./assets/other-logos/neighborhood-logo.svg"
-								author="John Doe"
-								testimonialText="Printing Talks is our go-to, from printing posters, stickers and packages.They are always able to provide the required in a timely manner!"
-							/></swiper-slide
-						>
-					</swiper-container>
-				</section>
-			</main>
+					<CallToAction href="/bestSellers/">View All</CallToAction>
+				</header>
+				<div class="gallery">
+					<Grid variant="offset">
+						{
+							bestSellers.map((product) => (
+								<li>
+									<ProductCard product={product} />
+								</li>
+							))
+						}
+					</Grid>
+				</div>
+			</section>
 		</main>
+		<section id="testimonials">
+			<header class="wrapper flex justify-between items-center">
+				<div class="flex flex-col max-w-[50ch]">
+					<h3>Testimonials</h3>
+					<p>Trust is at the core of everything we do</p>
+				</div>
+			</header>
+			<div
+				id="testimonial-slider"
+				class="flex w-full overflow-scroll px-5 xl:px-16 gap-6 py-8"
+			>
+				{
+					testimonials.map((testimonial) => (
+						<TestimonialCard
+							testimonialText={testimonial.data.testimonialText}
+							companyLogoUrl={testimonial.data.companyLogoUrl}
+							author={testimonial.data.author}
+						/>
+					))
+				}
+			</div>
+		</section>
+		<script>
+			document.addEventListener("DOMContentLoaded", () => {
+				const slider: any = document.getElementById("testimonial-slider");
+				let isDown = false;
+				let startX: number | undefined;
+				let scrollLeft: number | undefined;
+
+				slider.addEventListener("mousedown", (e: { pageX: number }) => {
+					isDown = true;
+					slider.classList.add("active");
+					startX = e.pageX - slider.offsetLeft;
+					scrollLeft = slider.scrollLeft;
+				});
+				slider.addEventListener("mouseleave", () => {
+					isDown = false;
+					slider.classList.remove("active");
+				});
+				slider.addEventListener("mouseup", () => {
+					isDown = false;
+					slider.classList.remove("active");
+				});
+				slider.addEventListener(
+					"mousemove",
+					(e: { preventDefault: () => void; pageX: number }) => {
+						if (!isDown) return;
+						e.preventDefault();
+						const x = e.pageX - slider.offsetLeft;
+						const walk = (x - startX) * 3; //scroll-fast
+						slider.scrollLeft = scrollLeft - walk;
+					},
+				);
+			});
+		</script>
+		<section id="quote-form" class="w-full">
+			<QuoteForm client:load products={products} />
+		</section>
 	</div>
 
 	<style>
@@ -144,6 +170,8 @@ const products = (await getCollection("products"))
 			background-repeat: no-repeat;
 			background-size: cover;
 		}
+		#testimonial-slider {
+			cursor: grab;
+		}
 	</style>
 </BaseLayout>
- ../components/LogoSlider.js

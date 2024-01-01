@@ -1,25 +1,20 @@
 ---
 interface Props {
-  companyLogoPath: string;
-  author: string;
-  testimonialText: string;
+  companyLogoUrl: string | undefined;
+  author: string | undefined;
+  testimonialText: string | undefined;
 }
 
-const { companyLogoPath, author, testimonialText } = Astro.props;
+const { companyLogoUrl, author, testimonialText } = Astro.props;
 ---
 
 <div
-  class="flex flex-col p-6 min-h-[504px] min-w-[364px] max-w-lg bg-white shadow-lg rounded-2xl relative"
+  class="testimonial-card flex flex-col p-6 min-h-[504px] min-w-[364px] max-w-lg bg-base-dark shadow-lg rounded-2xl relative"
 >
-  {/* Quotation Mark */}
-  <div class="absolute -top-3 -left-3 text-4xl text-neutral">
-    <!-- SVG Content Here -->
-  </div>
-
   {/* Company Logo */}
   <div class="image-container">
     <img
-      src={companyLogoPath}
+      src={companyLogoUrl || "assets/testimonial-images/default.svg"}
       alt={`${author}'s company logo`}
       class="h-[96px] mb-8"
     />
@@ -33,3 +28,9 @@ const { companyLogoPath, author, testimonialText } = Astro.props;
   {/* Author */}
   <footer class="font-semibold">{author}</footer>
 </div>
+
+<style>
+  .testimonial-card {
+    user-select: none;
+  }
+</style>
