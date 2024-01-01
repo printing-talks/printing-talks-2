@@ -5,9 +5,10 @@ import Nav from "../components/Nav.astro";
 interface Props {
 	title?: string | undefined;
 	desc?: string | undefined;
+	nav?: boolean | undefined;
 }
 
-const { title, desc } = Astro.props;
+const { title, desc, nav } = Astro.props;
 ---
 
 <!doctype html>
@@ -16,7 +17,7 @@ const { title, desc } = Astro.props;
 		<MainHead title={title} desc={desc} />
 	</head>
 	<body>
-		<Nav />
+		{nav !== false ? <Nav /> : null}
 		<slot />
 		<Footer />
 		<style is:global>

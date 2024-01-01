@@ -1,0 +1,35 @@
+---
+interface Props {
+  companyLogoPath: string;
+  author: string;
+  testimonialText: string;
+}
+
+const { companyLogoPath, author, testimonialText } = Astro.props;
+---
+
+<div
+  class="flex flex-col p-6 min-h-[504px] min-w-[364px] max-w-lg bg-white shadow-lg rounded-2xl relative"
+>
+  {/* Quotation Mark */}
+  <div class="absolute -top-3 -left-3 text-4xl text-neutral">
+    <!-- SVG Content Here -->
+  </div>
+
+  {/* Company Logo */}
+  <div class="image-container">
+    <img
+      src={companyLogoPath}
+      alt={`${author}'s company logo`}
+      class="h-[96px] mb-8"
+    />
+  </div>
+
+  {/* Testimonial Text */}
+  <blockquote class="text-gray-700 italic mb-4 flex-grow">
+    {testimonialText}
+  </blockquote>
+
+  {/* Author */}
+  <footer class="font-semibold">{author}</footer>
+</div>

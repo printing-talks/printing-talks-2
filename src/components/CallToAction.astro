@@ -1,13 +1,16 @@
 ---
 interface Props {
   href: string;
+  className?: string | undefined;
 }
 
-const { href } = Astro.props;
+const { href, className } = Astro.props;
 ---
 
-<a role="button" class="cta rounded bg-accent text-white py-3 px-4" href={href}
-  ><slot /></a
+<a
+  role="button"
+  class={`cta rounded bg-accent text-white py-3 px-4 ${className}`}
+  href={href}><slot /></a
 >
 
 <style>

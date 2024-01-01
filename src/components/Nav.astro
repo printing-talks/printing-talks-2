@@ -2,6 +2,13 @@
 import CallToAction from "./CallToAction.astro";
 import Icon from "./Icon.astro";
 
+interface Props {
+  className?: string | undefined;
+  cssPosition?: string | string;
+}
+
+const { className, cssPosition } = Astro.props;
+
 /** Main menu items */
 const textLinks: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
@@ -10,57 +17,56 @@ const textLinks: { label: string; href: string }[] = [
 ];
 ---
 
-<nav
-  class="sm:sticky sm:top-4 z-30 rounded-lg flex items-center justify-between p-4 backdrop-blur-2xl mx-auto w-[98%] sm:w-[95%]"
->
-  <a href="/" class="site-title">
-    <Icon icon="logo" size="3em" />
-  </a>
-  <!-- <menu-button>
-    <template>
-      <button class="menu-button" aria-expanded="false">
-        <span class="sr-only">Menu</span>
-        <Icon icon="list" />
+<header class="relative z-[999] md:sticky top-0 md:top-10 w-full">
+  <nav
+    class={`w-full rounded-none md:rounded-full md:w-[90%] mx-auto max-w-[1280px]  grid grid-cols-3 auto-cols-max place-content-center gap-4 px-6 py-4 bg-base/50 backdrop-blur-3xl ${className}`}
+  >
+    <div class="nav-left flex gap-4">
+      <button id="mobile-menu-btn" class="visible md:invisible">
+        <Icon icon="list" size="1.5em" />
       </button>
-    </template>
-  </menu-button> -->
-  <noscript>
-    <ul class="nav-links">
+      <a href="/" class="site-title" aria-label="Home">
+        <Icon icon="logo" size="3em" />
+      </a>
+    </div>
+    <div
+      class="nav-links hidden z-[999] md:flex justify-center place-content-center space-x-8"
+    >
       {
         textLinks.map(({ label, href }) => (
-          <li>
-            <a
-              aria-current={Astro.url.pathname === href}
-              class:list={[
-                "link",
-                {
-                  active:
-                    Astro.url.pathname === href ||
-                    (href !== "/" && Astro.url.pathname.startsWith(href)),
-                },
-              ]}
-              href={href}
-            >
-              {label}
-            </a>
-          </li>
+          <a
+            aria-current={Astro.url.pathname === href}
+            class="flex items-center justify-center"
+            class:list={[
+              "link",
+              {
+                active:
+                  Astro.url.pathname === href ||
+                  (href !== "/" && Astro.url.pathname.startsWith(href)),
+              },
+            ]}
+            href={href}
+          >
+            {label}
+          </a>
         ))
       }
-    </ul>
-  </noscript>
-  <noscript>
-    <div class="menu-footer">
-      <CallToAction href="/#quote-form/">
-        View All
-        <Icon icon="arrow-right" size="1.2em" />
+    </div>
+    <div class="nav-right col-span-2 md:col-auto flex items-center justify-end">
+      <CallToAction className="rounded-full" href="/#quote-form/">
+        <p class="">Get Quote</p>
       </CallToAction>
     </div>
-  </noscript>
-  <div class="nav-links flex space-x-8">
+  </nav>
+  <div
+    id="mobile-menu"
+    class="md:hidden absolute w-full flex flex-col gap-4 p-4 bg-base/50 backdrop-blur-3xl"
+  >
     {
       textLinks.map(({ label, href }) => (
         <a
           aria-current={Astro.url.pathname === href}
+          class="flex items-center"
           class:list={[
             "link",
             {
@@ -76,48 +82,42 @@ const textLinks: { label: string; href: string }[] = [
       ))
     }
   </div>
-  <div class="menu-footer">
-    <CallToAction href="/#quote-form/">
-      <p class="">Get Quote</p>
-    </CallToAction>
-  </div>
-</nav>
+</header>
 
 <script>
-  class MenuButton extends HTMLElement {
-    constructor() {
-      super();
-
-      // Inject menu toggle button when JS runs.
-      this.appendChild(this.querySelector("template")!.content.cloneNode(true));
-      const btn = this.querySelector("button")!;
-
-      // Hide menu (shown by default to support no-JS browsers).
-      const menu = document.getElementById("menu-content")!;
-      menu.hidden = true;
-      // Add "menu-content" class in JS to avoid covering content in non-JS browsers.
-      menu.classList.add("menu-content");
-
-      /** Set whether the menu is currently expanded or collapsed. */
-      const setExpanded = (expand: boolean) => {
-        btn.setAttribute("aria-expanded", expand ? "true" : "false");
-        menu.hidden = !expand;
-      };
-
-      // Toggle menu visibility when the menu button is clicked.
-      btn.addEventListener("click", () => setExpanded(menu.hidden));
-
-      // Hide menu button for large screens.
-      const handleViewports = (e: MediaQueryList | MediaQueryListEvent) => {
-        setExpanded(e.matches);
-        btn.hidden = e.matches;
-      };
-      const mediaQueries = window.matchMedia("(min-width: 50em)");
-      handleViewports(mediaQueries);
-      mediaQueries.addEventListener("change", handleViewports);
+  const toggleMobileMenu = () => {
+    const mobileMenu = document.getElementById("mobile-menu");
+    if (mobileMenu) {
+      mobileMenu.classList.toggle("show");
     }
+  };
+
+  const initMobileMenu = () => {
+    const mobileMenuBtn = document.getElementById("mobile-menu-btn");
+    if (mobileMenuBtn) {
+      mobileMenuBtn.addEventListener("click", toggleMobileMenu);
+    }
+  };
+
+  if (typeof window !== "undefined") {
+    window.addEventListener("load", initMobileMenu);
   }
-  customElements.define("menu-button", MenuButton);
 </script>
 
-<style></style>
+<style>
+  .link.active {
+    font-weight: bold;
+  }
+  #mobile-menu {
+    transition:
+      opacity 0.4s ease,
+      visibility 0.4s;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  #mobile-menu.show {
+    opacity: 1;
+    visibility: visible;
+  }
+</style>

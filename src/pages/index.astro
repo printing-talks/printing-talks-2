@@ -2,11 +2,10 @@
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
 import Grid from "../components/Grid.astro";
-import Hero from "../components/Hero.astro";
 import ProductCard from "../components/ProductCard.astro";
 import Features from "../components/Features.astro";
 import CallToAction from "../components/CallToAction.astro";
-import Nav from "../components/Nav.astro";
+import TestimonialCard from "../components/TestimonialCard.astro";
 
 // Content Fetching: List four most recent work projects
 const products = (await getCollection("products"))
@@ -15,15 +14,69 @@ const products = (await getCollection("products"))
 ---
 
 <BaseLayout>
-	<div class="flex flex-col gap-20 lg:gap-48">
-		<header class="w-full h-[100svh]">
-			<Hero
-				title="Printing Talks"
-				tagline="Custom packaging that leaves an impact"
-			/>
+	<div class="flex flex-col gap-20 translate-y-[-80px]">
+		<header
+			class="hero overflow-hidden relative flex flex-col min-h-[528px] h-[95svh] bg-base-darkest rounded-3xl place-content-center items-center md:mx-8 md:mt-6 p-8 text-white"
+		>
+			<h1 class="max-w-[20ch] font-normal md:text-center md:text-6xl">
+				Custom Packaging that leaves an <strong>impact</strong>
+			</h1>
+			<div
+				class="trusted-by invisible lg:visible absolute bottom-0 py-10 flex gap-12 sm:min-w-[40%] max-w-[90%]"
+			>
+				<img
+					src="./assets/other-logos/neighborhood-logo.svg"
+					alt=""
+					loading="lazy"
+					width="128"
+					height="50"
+					class="max-h-[72px]"
+				/>
+				<img
+					src="./assets/other-logos/notes-logo.svg"
+					alt=""
+					loading="lazy"
+					width="128"
+					height="50"
+					class="max-h-[72px]"
+				/>
+				<img
+					src="./assets/other-logos/sipn-logo.svg"
+					alt=""
+					loading="lazy"
+					width="128"
+					height="50"
+					class="max-h-[72px]"
+				/>
+				<img
+					src="./assets/other-logos/pdl-logo.svg"
+					alt=""
+					loading="lazy"
+					width="128"
+					height="50"
+					class="max-h-[72px]"
+				/>
+				<img
+					src="./assets/other-logos/slash-logo.svg"
+					alt=""
+					loading="lazy"
+					width="128"
+					height="50"
+					class="max-h-[72px]"
+				/>
+				<img
+					src="./assets/other-logos/wake-n-bake.svg"
+					alt=""
+					loading="lazy"
+					width="128"
+					height="50"
+					class="max-h-[72px]"
+				/>
+			</div>
 		</header>
+
 		<main>
-			<main class="wrapper space-y-24">
+			<main class="wrapper space-y-40">
 				<Features />
 				<section class="space-y-6">
 					<header class="flex justify-between items-center">
@@ -58,13 +111,39 @@ const products = (await getCollection("products"))
 						</div>
 					</header>
 					<swiper-container slides-per-view="1">
-						<swiper-slide>Slide 1</swiper-slide>
-						<swiper-slide>Slide 2</swiper-slide>
-						<swiper-slide>Slide 3</swiper-slide>
+						<swiper-slide
+							><TestimonialCard
+								companyLogoPath="./assets/other-logos/neighborhood-logo.svg"
+								author="John Doe"
+								testimonialText="Printing Talks is our go-to, from printing posters, stickers and packages.They are always able to provide the required in a timely manner!"
+							/></swiper-slide
+						>
+						<swiper-slide
+							><TestimonialCard
+								companyLogoPath="./assets/other-logos/neighborhood-logo.svg"
+								author="John Doe"
+								testimonialText="Printing Talks is our go-to, from printing posters, stickers and packages.They are always able to provide the required in a timely manner!"
+							/></swiper-slide
+						>
+						<swiper-slide
+							><TestimonialCard
+								companyLogoPath="./assets/other-logos/neighborhood-logo.svg"
+								author="John Doe"
+								testimonialText="Printing Talks is our go-to, from printing posters, stickers and packages.They are always able to provide the required in a timely manner!"
+							/></swiper-slide
+						>
 					</swiper-container>
 				</section>
 			</main>
 		</main>
 	</div>
-	<style></style>
+
+	<style>
+		.hero {
+			background-image: url("./assets/background.png");
+			background-repeat: no-repeat;
+			background-size: cover;
+		}
+	</style>
 </BaseLayout>
+ ../components/LogoSlider.js

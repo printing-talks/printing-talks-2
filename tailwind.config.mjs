@@ -6,15 +6,16 @@ export default {
 			colors: {
 				base: {
 					DEFAULT: 'rgba(255, 255, 255, 1)',
-					dark: 'rgba(235, 235, 235, 1)',
-					darker: 'rgba(200, 200, 200, 1)'
+					dark: 'rgba(247, 247, 247, 1)',
+					darker: 'rgba(227, 227, 227, 1)',
+					darkest: 'rgba(6, 12, 28, 1)',
 				},
 				primary: {
-					lighter: 'rgba(116, 119, 128, 1)',
-					light: 'rgba(69, 74, 86, 1)',
-					DEFAULT: 'rgba(23, 29, 44, 1)',
-					dark: 'rgba(18, 23, 35, 1)',
-					darker: 'rgba(14, 17, 26, 1)'
+					lighter: 'rgba(117, 151, 234, 1)',
+					light: 'rgba(51, 73, 125, 1)',
+					DEFAULT: 'rgba(18, 41, 99, 1)',
+					dark: 'rgba(9, 27, 74, 1)',
+					darker: 'rgba(8, 20, 49, 1)'
 				},
 				secondary: {
 					lighter: 'rgba(229, 234, 244, 1)',
@@ -58,6 +59,10 @@ export default {
 					lineHeight: '100%',
 					letterSpacing: '-0.03em',
 					fontWeight: '600',
+				}],
+				'6xl': ['5.6rem', {
+					lineHeight: '100%',
+					letterSpacing: '-0.03em',
 				}],
 			},
 		},
