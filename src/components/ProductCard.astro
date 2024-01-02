@@ -21,7 +21,9 @@ const { data, slug } = Astro.props.product;
       decoding="async"
     />
   </div>
-  <div class="min-h-[40%] flex flex-col justify-center bg-base px-8 py-4">
+  <div
+    class="min-h-[40%] flex flex-col justify-center bg-base px-2 md:px-8 py-2 md:py-4"
+  >
     <h6 class="font-bold">{data.title}</h6>
     <p class="line-clamp-1 sm:line-clamp-2">{data.description}</p>
   </div>
