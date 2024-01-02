@@ -12,16 +12,18 @@ const { data, slug } = Astro.props.product;
   href={`/products/${slug}`}
   class="card overflow-clip shadow-lg hover:shadow-2xl transition duration-300 rounded-xl bg-base-dark flex flex-col h-[16rem] md:h-[22rem]"
 >
-  <img
-    class="image-scale"
-    src={data.img}
-    alt={data.img_alt || ""}
-    loading="lazy"
-    decoding="async"
-  />
-  <div class="flex flex-col justify-center bg-base px-8 py-4">
+  <div class="max-h-[60%]">
+    <img
+      class="image-scale"
+      src={data.img}
+      alt={data.img_alt || ""}
+      loading="lazy"
+      decoding="async"
+    />
+  </div>
+  <div class="min-h-[40%] flex flex-col justify-center bg-base px-8 py-4">
     <h6 class="font-bold">{data.title}</h6>
-    <p class="line-clamp-2">{data.description}</p>
+    <p class="invisible sm:visible line-clamp-2">{data.description}</p>
   </div>
 </a>
 
