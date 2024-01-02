@@ -89,19 +89,23 @@ const categories = [
         const productCards = productGrid.querySelectorAll(".product-card");
 
         const filterProducts = () => {
-          const selectedCategories = Array.from(checkboxes)
-            .filter((chk) => chk.checked)
-            .map((chk) => chk.dataset.category);
+          const checkboxes = document.querySelectorAll(".checkbox-class"); // Example selector
 
-          productCards.forEach((card) => {
-            const category = card.dataset.category;
+          const selectedCategories = Array.from(checkboxes)
+            .filter((chk: Element) => (chk as HTMLInputElement).checked)
+            .map((chk: Element) => (chk as HTMLElement).dataset.category);
+
+          const productCards = document.querySelectorAll(".product-card"); // Example selector
+
+          productCards.forEach((card: Element) => {
+            const category = (card as HTMLElement).dataset.category;
             if (
               selectedCategories.length === 0 ||
               selectedCategories.includes(category)
             ) {
-              card.style.display = "";
+              (card as HTMLElement).style.display = "";
             } else {
-              card.style.display = "none";
+              (card as HTMLElement).style.display = "none";
             }
           });
         };
