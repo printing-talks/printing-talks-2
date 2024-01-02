@@ -5,15 +5,20 @@ interface Props {
 }
 
 const {
-  title = "Printing Talks: Abu Dhabi's Leading Printing and Packaging Factory",
-  desc = "Welcome to Printing Talks",
+  title = "Printing Talks",
+  desc = "Abu Dhabi's Leading Printing and Packaging Factory",
 } = Astro.props;
 ---
 
 <meta charset="UTF-8" />
 <meta name="description" property="og:description" content={desc} />
-<meta name="viewport" content="width=device-width" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <meta name="generator" content={Astro.generator} />
+<meta property="og:type" content="website" />
+<link rel="canonical" href="https://www.printingtalks.ae/" />
+<meta property="og:url" content="https://www.printingtalks.ae/" />
+<meta name="twitter:card" content="twitter-card.png" />
+<meta name="robots" content="index, follow" />
 <title>{title}</title>
 
 <link rel="icon" type="image/webp" href="/favicon.webp" />
