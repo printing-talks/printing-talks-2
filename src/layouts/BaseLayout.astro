@@ -13,10 +13,10 @@ const { title, desc, nav } = Astro.props;
 
 <!doctype html>
 <html lang="en">
-	<head>
+	<head data-theme="light">
 		<MainHead title={title} desc={desc} />
 	</head>
-	<body>
+	<body class="text-black bg-base">
 		{nav !== false ? <Nav /> : null}
 		<slot />
 		<Footer />
