@@ -67,7 +67,10 @@ export default {
 			},
 		},
 	},
-	plugins: [],
+	plugins: [require("daisyui")],
+	daisyui: {
+		themes: false,
+	},
 }
 
 /* Text-size styles */

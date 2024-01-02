@@ -6,7 +6,10 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import DOMPurify from 'dompurify';
-import { getCollection } from "astro:content";
+
+interface QuoteForm {
+  products: any | undefined;
+}
 
 interface IFormInput {
   firstName: string;
@@ -101,17 +104,14 @@ function QuoteForm({ products }) {
   };
 
   return (
-    <section
-      id="request-quote-form-section"
-      className="mt-[96px] mx-auto w-full rounded-3xl bg-accent grid place-items-center p-6 text-accent-content"
-    >
+    <>
       <h2 className="text-3xl lg:text-4xl">Request a quote</h2>
       <p className="text-lg lg:text-xl">Get a custom quote for boxes and more.</p>
 
-      <form id="request-quote-form" className="form-control w-full max-w-xs" onSubmit={handleSubmit(onSubmit)}>
+      <form id="quote-form" className="form-control w-full max-w-xs" onSubmit={handleSubmit(onSubmit)}>
 
         <label className="label" htmlFor="firstName">
-          <span className="label-text text-accent-content">First Name</span>
+          <span className="label-text ">First Name</span>
         </label>
         <input
           id="firstName" // Added id to link with label
@@ -126,11 +126,11 @@ function QuoteForm({ products }) {
         />
         {errors.firstName &&
           <div className="label" aria-live="polite">
-            <span className="label-text-alt text-accent-content">{errors.firstName.message}</span>
+            <span className="label-text-alt ">{errors.firstName.message}</span>
           </div>}
 
         <label className="label" htmlFor="lastName">
-          <span className="label-text text-accent-content">Last Name</span>
+          <span className="label-text ">Last Name</span>
         </label>
         <input
           id="lastName"
@@ -145,11 +145,11 @@ function QuoteForm({ products }) {
         />
         {errors.lastName &&
           <div className="label" aria-live="polite">
-            <span className="label-text-alt text-accent-content">{errors.lastName.message}</span>
+            <span className="label-text-alt ">{errors.lastName.message}</span>
           </div>}
 
         <label className="label" htmlFor="email">
-          <span className="label-text text-accent-content">Email</span>
+          <span className="label-text ">Email</span>
         </label>
         <input
           id="email"
@@ -164,11 +164,11 @@ function QuoteForm({ products }) {
         />
         {errors.email &&
           <div className="label" aria-live="polite">
-            <span className="label-text-alt text-accent-content">{errors.email.message}</span>
+            <span className="label-text-alt ">{errors.email.message}</span>
           </div>}
 
         <label className="label" htmlFor="phone">
-          <span className="label-text text-accent-content">Phone Number</span>
+          <span className="label-text ">Phone Number</span>
         </label>
         <Input
           id="phone"
@@ -182,11 +182,11 @@ function QuoteForm({ products }) {
         />
         {errors.phone &&
           <div className="label" aria-live="polite">
-            <span className="label-text-alt text-accent-content">{errors.phone.message}</span>
+            <span className="label-text-alt ">{errors.phone.message}</span>
           </div>}
 
         <label className="label" htmlFor="product">
-          <span className="label-text text-accent-content">What products are you interested in?</span>
+          <span className="label-text ">What products are you interested in?</span>
         </label>
         <select
           id="product"
@@ -205,11 +205,11 @@ function QuoteForm({ products }) {
         </select>
         {errors.product &&
           <div className="label" id="product-error" aria-live="polite">
-            <span className="label-text-alt text-accent-content">{errors.product.message}</span>
+            <span className="label-text-alt ">{errors.product.message}</span>
           </div>}
 
         <label className="label" htmlFor="artwork">
-          <span className="label-text text-accent-content">Do you have artwork?</span>
+          <span className="label-text ">Do you have artwork?</span>
         </label>
         <select
           id="artwork" // Added id to link with label
@@ -222,11 +222,11 @@ function QuoteForm({ products }) {
         </select>
         {errors.artwork &&
           <div className="label" aria-live="polite">
-            <span className="label-text-alt text-accent-content">{errors.artwork.message}</span>
+            <span className="label-text-alt ">{errors.artwork.message}</span>
           </div>}
 
         <label className="label" htmlFor="quantity">
-          <span className="label-text text-accent-content">Quantity</span>
+          <span className="label-text ">Quantity</span>
         </label>
         <select
           id="quantity"
@@ -241,14 +241,11 @@ function QuoteForm({ products }) {
         </select>
         {errors.quantity &&
           <div className="label" aria-live="polite">
-            <span className="label-text-alt text-accent-content">{errors.quantity.message}</span>
+            <span className="label-text-alt ">{errors.quantity.message}</span>
           </div>}
-
-
-
         <button type="submit" className="btn mt-4 max-w-fit mx-auto">Submit</button>
       </form>
-    </section>
+    </>
   );
 };
 

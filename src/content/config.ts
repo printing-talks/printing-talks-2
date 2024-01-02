@@ -14,12 +14,16 @@ const productCollection = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    publishDate: z.coerce.date(),
-    tags: z.array(z.string()),
+    isBestSeller: z.boolean(),
+    types: z.array(z.string()).optional(),
+    sizes: z.array(z.string()).optional(),
     img: z.string(),
-    img_alt: z.string().optional()
+    img_alt: z.string().optional(),
+    // Adding the category property
+    category: z.enum(['Food', 'Retail', 'Marketing', 'Office', 'Speciality', 'Misc']).default('Misc')
   })
 });
+
 // 3. Export a single `collections` object to register your collection(s)
 //    This key should match your collection directory name in "src/content"
 export const collections = {

@@ -1,50 +1,117 @@
 ---
 import { getCollection } from "astro:content";
-
 import BaseLayout from "../layouts/BaseLayout.astro";
-
-import Hero from "../components/Hero.astro";
-import Grid from "../components/Grid.astro";
 import ProductCard from "../components/ProductCard.astro";
 
-const products = (await getCollection("products")).sort(
-  (a, b) => b.data.publishDate.valueOf() - a.data.publishDate.valueOf(),
-);
+const products = await getCollection("products");
+const categories = [
+  "Food",
+  "Retail",
+  "Marketing",
+  "Office",
+  "Speciality",
+  "Misc",
+];
 ---
 
 <BaseLayout
   title="Products | Printing Talks"
   desc="Learn about Jeanine White's most recent products"
 >
-  <div class="stack gap-20">
-    <main class="mt-24">
+  <div class="flex flex-col gap-20">
+    <main class="mt-24 min-h-[90svh]">
       <header class="border-b border-solid border-base-darker">
-        <div class="header wrapper p-4 md:p-8 flex flex-col">
+        <div class="header p-4 md:p-8 flex flex-col">
           <h1 class="text-accent">Products</h1>
-          <p class="text-xl">
+          <p class="text-lg md:text-xl">
             Design and order a wide range of fully customisable packaging
             products for your brand.
           </p>
         </div>
       </header>
       <div
-        class="md:hidden sticky top-0 flex overflow-auto px-4 py-8 gap-4 outline outline-1 outline-gray-300 backdrop-blur-2xl z-30"
+        class="refinement-panel md:hidden sticky top-0 flex overflow-auto px-4 py-8 gap-4 outline outline-1 outline-gray-300 backdrop-blur-2xl z-30"
       >
         <!-- {categoryCheckboxes} -->
+        {
+          categories.map((category) => (
+            <input
+              aria-label={category}
+              data-category={category}
+              value={category}
+              type="checkbox"
+              class="btn btn-ghost btn-accent btn-sm font-medium w-fit"
+            />
+          ))
+        }
       </div>
       <div class="search-results-container flex p-2 md:px-12 md:py-8">
         <aside
-          class="hidden md:flex flex-col sticky top-28 flex-shrink-0 overflow-x-hidden overflow-y-auto min-w-fit lg:min-w-[256px] max-w-lg h-fit py-6 pr-6 gap-1"
+          class="refinement-panel hidden md:flex flex-col sticky top-28 flex-shrink-0 overflow-x-hidden overflow-y-auto min-w-fit lg:min-w-[256px] max-w-lg h-fit py-6 pr-6 gap-1"
         >
           <p class="text-xl font-medium mb-2">Categories</p>
           <!-- {categoryCheckboxes} -->
+          {
+            categories.map((category) => (
+              <input
+                aria-label={category}
+                data-category={category}
+                value={category}
+                type="checkbox"
+                class="btn btn-ghost btn-accent btn-sm font-medium w-fit"
+              />
+            ))
+          }
         </aside>
         <div
+          id="product-grid"
           class="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-2 md:gap-6 min-h-[12rem] w-full"
         >
-          {products.map((product) => <ProductCard product={product} />)}
+          {
+            products.map((product) => (
+              <div class="product-card" data-category={product.data.category}>
+                <ProductCard product={product} />
+              </div>
+            ))
+          }
         </div>
       </div>
     </main>
   </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const productGrid = document.getElementById("product-grid");
+
+      if (productGrid) {
+        const checkboxes = document.querySelectorAll(
+          '.refinement-panel input[type="checkbox"]',
+        );
+        const productCards = productGrid.querySelectorAll(".product-card");
+
+        const filterProducts = () => {
+          const selectedCategories = Array.from(checkboxes)
+            .filter((chk) => chk.checked)
+            .map((chk) => chk.dataset.category);
+
+          productCards.forEach((card) => {
+            const category = card.dataset.category;
+            if (
+              selectedCategories.length === 0 ||
+              selectedCategories.includes(category)
+            ) {
+              card.style.display = "";
+            } else {
+              card.style.display = "none";
+            }
+          });
+        };
+
+        checkboxes.forEach((checkbox) => {
+          checkbox.addEventListener("change", filterProducts);
+        });
+      } else {
+        console.error("Product grid not found");
+      }
+    });
+  </script>
 </BaseLayout>

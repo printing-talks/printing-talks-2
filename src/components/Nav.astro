@@ -4,16 +4,14 @@ import Icon from "./Icon.astro";
 
 interface Props {
   className?: string | undefined;
-  cssPosition?: string | string;
 }
 
-const { className, cssPosition } = Astro.props;
+const { className } = Astro.props;
 
 /** Main menu items */
 const textLinks: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products/" },
-  { label: "About", href: "/about/" },
 ];
 ---
 
@@ -30,17 +28,16 @@ const textLinks: { label: string; href: string }[] = [
       </a>
     </div>
     <div
-      class="nav-links hidden z-[999] md:flex justify-center place-content-center space-x-8"
+      class="nav-links hidden z-[999] md:flex justify-center items-center space-x-8"
     >
       {
         textLinks.map(({ label, href }) => (
           <a
             aria-current={Astro.url.pathname === href}
-            class="flex items-center justify-center"
             class:list={[
-              "link",
+              "nav-anchor",
               {
-                active:
+                "anchor-active":
                   Astro.url.pathname === href ||
                   (href !== "/" && Astro.url.pathname.startsWith(href)),
               },
@@ -66,11 +63,10 @@ const textLinks: { label: string; href: string }[] = [
       textLinks.map(({ label, href }) => (
         <a
           aria-current={Astro.url.pathname === href}
-          class="flex items-center"
           class:list={[
-            "link",
+            "nav-anchor",
             {
-              active:
+              "anchor-active":
                 Astro.url.pathname === href ||
                 (href !== "/" && Astro.url.pathname.startsWith(href)),
             },
@@ -105,7 +101,10 @@ const textLinks: { label: string; href: string }[] = [
 </script>
 
 <style>
-  .link.active {
+  .nav-anchor {
+    display: block;
+  }
+  .anchor-active {
     font-weight: bold;
   }
   #mobile-menu {

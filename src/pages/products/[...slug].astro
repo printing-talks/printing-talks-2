@@ -26,35 +26,62 @@ const { Content } = await entry.render();
 ---
 
 <BaseLayout title={entry.data.title} desc={entry.data.description}>
-  <div class="stack gap-20">
-    <div class="stack gap-15">
-      <header>
-        <div class="wrapper stack gap-2">
-          <a class="back-link" href="/products/"
-            ><Icon icon="arrow-left" /> Product</a
-          >
-          <Hero title={entry.data.title}>
-            <div class="details">
-              <!-- <div class="tags">
-								{entry.data.tags.map((t) => <Pill>{t}</Pill>)}
-							</div> -->
-              <p>{entry.data.description}</p>
+  <main class="wrapper">
+    <div
+      class="container p-4 flex flex-col gap-10 md:flex-row mx-auto my-8 sm:my-16 min-h-[95svh]"
+    >
+      <div id="product-images" class="max-w-[800px]">
+        <img class="max-w-100% rounded-2xl" src={entry.data.img} alt="" />
+      </div>
+      <div
+        id="product-info"
+        class="flex flex-col w-[100%] sm:w-[478px] sm:min-w-[256px] gap-4"
+      >
+        {
+          entry.data.isBestSeller && (
+            <div class="grid place-items-center bg-orange-400 px-3 py-1 rounded-2xl max-w-fit">
+              <small class="font-bold">Best Seller</small>
             </div>
-          </Hero>
+          )
+        }
+        <div>
+          <h3>{entry.data.title}</h3>
+          <h6>{entry.data.category}</h6>
         </div>
-      </header>
-      <main class="wrapper">
-        <div class="stack gap-10 content">
-          {
-            entry.data.img && (
-              <img src={entry.data.img} alt={entry.data.img_alt || ""} />
-            )
-          }
-          <div class="content">
-            <Content />
-          </div>
+        <div>
+          <p class="font-bold">Description</p>
+          <p>{entry.data.description}</p>
         </div>
-      </main>
+        {
+          entry.data.types && entry.data.types.length > 0 && (
+            <div>
+              <p class="font-bold">Product Types</p>
+              <div id="type-selection" class="flex flex-wrap gap-2">
+                {entry.data.types.map((type) => (
+                  <div class="grid place-items-center border rounded-md min-w-[104px] px-2 h-10">
+                    <p>{type}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        }
+
+        {
+          entry.data.sizes && entry.data.sizes.length > 0 && (
+            <div>
+              <p class="font-bold">Available Sizes</p>
+              <div class="flex flex-wrap gap-2">
+                {entry.data.sizes.map((size) => (
+                  <div class="grid place-items-center border rounded-md min-w-[104px] px-2 h-10">
+                    <p>{size}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )
+        }
+      </div>
     </div>
-  </div>
+  </main>
 </BaseLayout>
