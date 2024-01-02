@@ -85,27 +85,25 @@ const categories = [
       if (productGrid) {
         const checkboxes = document.querySelectorAll(
           '.refinement-panel input[type="checkbox"]',
-        );
-        const productCards = productGrid.querySelectorAll(".product-card");
+        ) as NodeListOf<HTMLInputElement>;
+        const productCards = productGrid.querySelectorAll(
+          ".product-card",
+        ) as NodeListOf<HTMLElement>;
 
         const filterProducts = () => {
-          const checkboxes = document.querySelectorAll(".checkbox-class"); // Example selector
-
           const selectedCategories = Array.from(checkboxes)
-            .filter((chk: Element) => (chk as HTMLInputElement).checked)
-            .map((chk: Element) => (chk as HTMLElement).dataset.category);
+            .filter((chk) => chk.checked)
+            .map((chk) => chk.dataset.category);
 
-          const productCards = document.querySelectorAll(".product-card"); // Example selector
-
-          productCards.forEach((card: Element) => {
-            const category = (card as HTMLElement).dataset.category;
+          productCards.forEach((card) => {
+            const category = card.dataset.category;
             if (
               selectedCategories.length === 0 ||
               selectedCategories.includes(category)
             ) {
-              (card as HTMLElement).style.display = "";
+              card.style.display = "";
             } else {
-              (card as HTMLElement).style.display = "none";
+              card.style.display = "none";
             }
           });
         };
