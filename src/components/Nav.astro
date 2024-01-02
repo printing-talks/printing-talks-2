@@ -20,9 +20,14 @@ const textLinks: { label: string; href: string }[] = [
     class={`w-full rounded-none md:rounded-full md:w-[90%] mx-auto max-w-[1280px]  grid grid-cols-3 auto-cols-max place-content-center gap-4 px-6 py-4 bg-base/50 backdrop-blur-3xl ${className}`}
   >
     <div class="nav-left flex gap-4">
-      <button id="mobile-menu-btn" class="visible md:invisible">
-        <Icon icon="list" size="1.5em" />
+      <button
+        id="mobile-menu-btn"
+        class="visible md:invisible"
+        aria-label="Open menu"
+      >
+        <Icon icon="list" size="1.5em" aria-hidden="true" />
       </button>
+
       <a href="/" class="site-title" aria-label="Home">
         <Icon icon="logo" size="3em" />
       </a>

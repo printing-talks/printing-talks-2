@@ -26,7 +26,7 @@ const iconLinks: {
 >
   <aside>
     <a href="/" class="site-title">
-      <Icon icon="logo" size="1.6em" />
+      <Icon icon="logo" size="3em" />
        Printing Talks
     </a>
     <div class="flex">
@@ -34,7 +34,7 @@ const iconLinks: {
         iconLinks.map(({ href, icon, label }) => (
           <a href={href} class="social">
             <span class="sr-only">{label}</span>
-            <Icon icon={icon} />
+            <Icon size="2em" icon={icon} />
           </a>
         ))
       }
