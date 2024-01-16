@@ -18,9 +18,9 @@ const testimonials = await getCollection("testimonials");
 ---
 
 <BaseLayout>
-	<div class="flex flex-col gap-20 translate-y-[-80px]">
+	<div class="space-y-20 translate-y-[-80px]">
 		<header
-			class="hero-section overflow-hidden relative flex flex-col min-h-[528px] h-[100svh] md:h[95svh] bg-base-darkest rounded-3xl place-content-center items-center md:mx-8 md:mt-6 p-8 text-white"
+			class="hero-section overflow-x-hidden relative flex flex-col min-h-[528px] h-[100svh] md:h[95svh] bg-base-darkest rounded-3xl place-content-center items-center md:mx-8 md:mt-6 p-8 text-white"
 		>
 			<h1 class="max-w-[20ch] font-normal md:text-center md:text-6xl">
 				Custom Packaging that leaves an <strong>impact</strong>
@@ -173,6 +173,7 @@ const testimonials = await getCollection("testimonials");
 			background-image: url("/assets/hero-background.webp");
 			background-repeat: no-repeat;
 			background-size: cover;
+			overflow-x: hidden;
 		}
 		#testimonial-slider-container {
 			position: relative;

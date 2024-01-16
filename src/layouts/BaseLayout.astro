@@ -59,15 +59,36 @@ const { title, desc, nav } = Astro.props;
 			h6 {
 				@apply text-lg;
 			}
+			/* Hide the scrollbar for all browsers */
+			body::-webkit-scrollbar {
+				width: 0.2rem; /* Adjust the width as needed */
+			}
+			body::-webkit-scrollbar-thumb {
+				background-color: transparent; /* Make the scrollbar thumb transparent */
+			}
+			body::-webkit-scrollbar-track {
+				background-color: transparent; /* Make the scrollbar track transparent */
+			}
+			/* For Firefox */
+			body {
+				scrollbar-width: thin; /* Adjust the width as needed */
+				scrollbar-color: transparent transparent; /* Make the scrollbar thumb and track transparent */
+			}
+			/* For Internet Explorer and Edge */
+			body {
+				-ms-overflow-style: none; /* Hide the scrollbar in IE and Edge */
+			}
 			.wrapper {
 				width: 100%;
 				max-width: 83rem;
 				margin-inline: auto;
 				padding-inline: 1.5rem;
+				overflow-x: hidden;
 			}
 			#quote-form {
 				object-fit: fill;
 				background-image: url("/assets/boxes-texture.png");
+				overflow: hidden;
 			}
 		</style>
 	</body>

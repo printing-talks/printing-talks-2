@@ -17,26 +17,25 @@ const iconLinks: {
 ---
 
 <footer
-  class="flex justify-between items-center p-5 md:py-10 md:px-20 bg-base-200 text-base-content mx-auto w-[100%] mt-16"
+  class="relative w-full max-w-[83rem] mx-auto grid grid-cols-3 py-8 px-6 overflow-clip"
 >
-  <aside>
+  <div class="flex flex-col justify-between items-start gap-4 overflow-clip">
     <a href="/" class="site-title">
       <Icon icon="logo" size="3em" />
-       Printing Talks
     </a>
-    <div class="flex">
-      {
-        iconLinks.map(({ href, icon, label }) => (
-          <a href={href} class="social">
-            <span class="sr-only">{label}</span>
-            <Icon size="2.5em" icon={icon} />
-          </a>
-        ))
-      }
-    </div>
-  </aside>
-
-  <div class="flex flex-col gap-2 justify-end items-end">
+    <p>Printing Talks</p>
+  </div>
+  <div class="flex items-center justify-center gap-4">
+    {
+      iconLinks.map(({ href, icon, label }) => (
+        <a href={href} class="social">
+          <span class="sr-only">{label}</span>
+          <Icon size="2.25em" icon={icon} />
+        </a>
+      ))
+    }
+  </div>
+  <div class="flex flex-col items-end gap-4 text-right overflow-clip">
     <a type="button" href="/gmp-cert.pdf">
       <img
         class="w-12 h-12"
@@ -47,7 +46,6 @@ const iconLinks: {
         >Goods Manufacturing Practice Certificate (PDF)</span
       >
     </a>
-
-    <p class="text-xs">Copyright Printing Talks 2023</p>
+    <p class="text-xs">Copyright Printing Talks 2024</p>
   </div>
 </footer>
