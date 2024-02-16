@@ -69,7 +69,20 @@ export default {
 	},
 	plugins: [require("daisyui")],
 	daisyui: {
-		themes: ["light"],
+		themes: [
+			{printingTalks: {
+				"primary": "#122963",
+				"secondary": "#d4dced",
+				"accent": "#831d3a",
+				"neutral": "#f7f7f7",
+				"base-100": "#ffffff",
+				"info": "#00aeff",
+				"success": "#00ef64",
+				"warning": "#ff7800",
+				"error": "#ff4d75",
+				},
+			},
+			"light"],
 	},
 }
 

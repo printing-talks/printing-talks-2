@@ -7,10 +7,8 @@ interface Props {
 const { href, className } = Astro.props;
 ---
 
-<a
-  role="button"
-  class={`cta rounded bg-accent text-white py-3 px-4 ${className}`}
-  href={href}><slot /></a
+<a role="button" class={`btn btn-accent py-3 px-4 ${className}`} href={href}
+  ><slot /></a
 >
 
 <style>
@@ -25,7 +23,7 @@ const { href, className } = Astro.props;
   }
 
   /* CSS */
-  .cta {
+  /* .cta {
     max-width: fit-content;
     appearance: none;
     box-sizing: border-box;
@@ -51,5 +49,5 @@ const { href, className } = Astro.props;
   .cta:active {
     box-shadow: none;
     transform: translateY(0);
-  }
+  } */
 </style>

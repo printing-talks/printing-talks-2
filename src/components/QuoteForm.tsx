@@ -243,7 +243,7 @@ function QuoteForm({ products }) {
           <div className="label" aria-live="polite">
             <span className="label-text-alt ">{errors.quantity.message}</span>
           </div>}
-        <button type="submit" className="btn mt-4 max-w-fit mx-auto">Submit</button>
+        <button type="submit" className="btn btn-neutral mt-4 max-w-fit mx-auto">Submit</button>
       </form>
     </>
   );

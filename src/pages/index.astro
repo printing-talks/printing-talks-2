@@ -25,6 +25,17 @@ const testimonials = await getCollection("testimonials");
 			<h1 class="max-w-[20ch] font-normal md:text-center md:text-6xl">
 				Custom Packaging that leaves an <strong>impact</strong>
 			</h1>
+			<div class="flex gap-2 mt-6">
+				<CallToAction href="/#quote-form-section">
+					<p class="">Get Quote</p>
+				</CallToAction>
+				<CallToAction
+					className="btn-neutral"
+					href="https://api.whatsapp.com/send?phone=971501100400"
+				>
+					<p class="">Whatsapp Us</p>
+				</CallToAction>
+			</div>
 			<div
 				class="trusted-by invisible lg:visible absolute bottom-0 py-10 flex gap-12 sm:min-w-[40%] max-w-[90%]"
 			>
@@ -128,7 +139,7 @@ const testimonials = await getCollection("testimonials");
 				</div>
 			</section>
 			<section
-				id="quote-form"
+				id="quote-form-section"
 				class="rounded-3xl bg-secondary-lighter grid place-items-center p-6"
 			>
 				<QuoteForm client:load products={products} />

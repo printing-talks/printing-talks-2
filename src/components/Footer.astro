@@ -13,6 +13,11 @@ const iconLinks: {
     href: "https://www.instagram.com/printingtalks.ae/",
     icon: "instagram-logo",
   },
+  {
+    label: "Whatsapp",
+    href: "https://api.whatsapp.com/send?phone=971501100400",
+    icon: "whatsapp-logo",
+  },
 ];
 ---
 
@@ -28,10 +33,12 @@ const iconLinks: {
   <div class="flex items-center justify-center gap-4">
     {
       iconLinks.map(({ href, icon, label }) => (
-        <a href={href} class="social">
-          <span class="sr-only">{label}</span>
-          <Icon size="2.25em" icon={icon} />
-        </a>
+        <>
+          <a href={href} class="social">
+            <span class="sr-only">{label}</span>
+            <Icon size="2.25em" icon={icon} />
+          </a>
+        </>
       ))
     }
   </div>
