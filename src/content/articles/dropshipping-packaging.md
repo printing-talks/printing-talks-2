@@ -1,6 +1,6 @@
 ---
 title: "Custom Packaging for Dropshipping in the UAE: A Complete Guide with Printing Talks"
-author: "SEO Packaging Solutions"
+author: "Printing Talks"
 publishDate: 2024-03-06
 lastUpdated: 2024-03-06
 tags: ["Custom Packaging", "Dropshipping", "UAE", "Printing Talks"]

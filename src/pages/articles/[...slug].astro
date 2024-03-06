@@ -20,7 +20,7 @@ const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
 
-<BaseLayout title={entry.data.title} desc={entry.data.description}>
+<BaseLayout title={entry.data.title} desc={entry.data.summary}>
   <header class="md:mt-14 mt-4 border-b border-solid border-base-darker">
     <div class="header p-6 md:p-8 max-w-[83rem] mx-auto flex flex-col">
       <h1 class="text-accent">{entry.data.title}</h1>
