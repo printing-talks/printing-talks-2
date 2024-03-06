@@ -71,7 +71,8 @@ function QuoteForm({ products }) {
   };
 
   // Initialize useForm
-  const { register, handleSubmit, reset, formState: { errors } } = useForm<IFormInput>({
+
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<IFormInput>({//@ts-ignore
     resolver: yupResolver(schema),
   });
 

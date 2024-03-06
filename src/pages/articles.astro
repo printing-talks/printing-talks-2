@@ -16,7 +16,6 @@ export async function getStaticPaths() {
   }));
 }
 
-const { entry } = Astro.props;
 const articles = await getCollection("articles");
 ---
 
