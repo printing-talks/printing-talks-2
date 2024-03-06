@@ -1,15 +1,3 @@
 {
-  "extends": "astro/tsconfigs/strict",
-  "compilerOptions": {
-    "jsx": "react-jsx",
-    "jsxImportSource": "react",
-    "module": "commonjs",
-    "strict": false,
-    "noImplicitAny": false,
-    "strictNullChecks": false,
-    "strictFunctionTypes": false,
-    "strictPropertyInitialization": false,
-    "esModuleInterop": true,
-    "verbatimModuleSyntax": false
-  }
+  "extends": "astro/tsconfigs/base"
 }
