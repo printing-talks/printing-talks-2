@@ -1,0 +1,50 @@
+---
+import { CollectionEntry, getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ArticleCard from "../components/ArticleCard.astro";
+
+interface Props {
+  entry: CollectionEntry<"articles">;
+  Content: any; // Represents the dynamically imported markdown content
+}
+
+export async function getStaticPaths() {
+  const articles = await getCollection("articles");
+  return articles.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const articles = await getCollection("articles");
+---
+
+<BaseLayout
+  title="Articles | Printing Talks"
+  desc="Read about all things packaging"
+>
+  <main>
+    <header class="md:mt-14 mt-4 border-b border-solid border-base-darker">
+      <div class="header p-6 md:p-8 max-w-[83rem] mx-auto flex flex-col">
+        <h1 class="text-accent">Articles</h1>
+        <p class="text-lg md:text-xl">Read about all things packaging</p>
+      </div>
+    </header>
+    <div
+      class="wrapper grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 md:mt-8 py-8"
+    >
+      <!-- Loop through each article and render an ArticleCard with a link -->
+      {
+        articles.map((article) => (
+          <ArticleCard
+            title={article.data.title}
+            description={article.data.description}
+            buttonText="Read More"
+            link={`/articles/${article.slug}`}
+          />
+        ))
+      }
+    </div>
+  </main>
+</BaseLayout>

@@ -1,13 +1,16 @@
 ---
 interface Props {
   href: string;
+  label: string;
   className?: string | undefined;
 }
 
-const { href, className } = Astro.props;
+const { href, className, label } = Astro.props;
 ---
 
-<a role="button" class={`btn btn-accent ${className}`} href={href}><slot /></a>
+<a aria-label={label} class={`btn btn-accent ${className}`} href={href}
+  ><slot /></a
+>
 
 <style>
   a {

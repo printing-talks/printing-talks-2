@@ -7,6 +7,7 @@ import Features from "../components/Features.astro";
 import CallToAction from "../components/CallToAction.astro";
 import TestimonialCard from "../components/TestimonialCard.astro";
 import QuoteForm from "../components/QuoteForm";
+import { Image } from "astro:assets";
 
 // Content Fetching: List four most recent work projects
 const bestSellers = (await getCollection("products"))
@@ -28,61 +29,65 @@ const testimonials = await getCollection("testimonials");
 			<div class="flex gap-2 mt-6">
 				<CallToAction
 					className="btn-neutral"
+					label="Contact Us on Whatsapp Call To Action"
 					href="https://api.whatsapp.com/send?phone=971564002204"
 				>
 					<p class="">Contact Us</p>
 				</CallToAction>
-				<CallToAction href="/#quote-form-section">
+				<CallToAction
+					href="/#quote-form-section"
+					label="Get Quote Call To Action"
+				>
 					<p class="">Get Quote</p>
 				</CallToAction>
 			</div>
 			<div
 				class="trusted-by invisible lg:visible absolute bottom-0 py-10 flex gap-12 sm:min-w-[40%] max-w-[90%]"
 			>
-				<img
-					src="./assets/other-logos/neighborhood-logo.svg"
+				<Image
+					src="/assets/other-logos/neighborhood-logo.svg"
 					alt="Neighborhood cafe logo"
-					loading="lazy"
+					loading="eager"
 					width="128"
 					height="50"
 					class="max-h-[72px]"
 				/>
-				<img
-					src="./assets/other-logos/notes-logo.svg"
+				<Image
+					src="/assets/other-logos/notes-logo.svg"
 					alt="Notes cafe logo"
-					loading="lazy"
+					loading="eager"
 					width="128"
 					height="50"
 					class="max-h-[72px]"
 				/>
-				<img
-					src="./assets/other-logos/sipn-logo.svg"
+				<Image
+					src="/assets/other-logos/sipn-logo.svg"
 					alt="Sipn' cafe logo"
-					loading="lazy"
+					loading="eager"
 					width="128"
 					height="50"
 					class="max-h-[72px]"
 				/>
-				<img
-					src="./assets/other-logos/pdl-logo.svg"
+				<Image
+					src="/assets/other-logos/pdl-logo.svg"
 					alt="PDL Company logo"
-					loading="lazy"
+					loading="eager"
 					width="128"
 					height="50"
 					class="max-h-[72px]"
 				/>
-				<img
-					src="./assets/other-logos/slash-logo.svg"
+				<Image
+					src="/assets/other-logos/slash-logo.svg"
 					alt="Slash cafe logo"
-					loading="lazy"
+					loading="eager"
 					width="128"
 					height="50"
 					class="max-h-[72px]"
 				/>
-				<img
-					src="./assets/other-logos/wake-n-bake.svg"
+				<Image
+					src="/assets/other-logos/wake-n-bake.svg"
 					alt="Wake n Bake cafe logo"
-					loading="lazy"
+					loading="eager"
 					width="128"
 					height="50"
 					class="max-h-[72px]"
@@ -100,7 +105,12 @@ const testimonials = await getCollection("testimonials");
 							Explore our best selling products across a range of categories
 						</p>
 					</div>
-					<CallToAction href="/products/">View All</CallToAction>
+					<CallToAction
+						label="View All Products Call To Action"
+						href="/products/"
+					>
+						View All
+					</CallToAction>
 				</header>
 				<div class="gallery">
 					<Grid variant="offset">

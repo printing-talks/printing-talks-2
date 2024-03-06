@@ -13,6 +13,7 @@ const { className } = Astro.props;
 const textLinks: { label: string; href: string }[] = [
   { label: "Home", href: "/" },
   { label: "Products", href: "/products/" },
+  { label: "Articles", href: "/articles/" },
 ];
 ---
 
@@ -62,12 +63,17 @@ const textLinks: { label: string; href: string }[] = [
       class="nav-right col-span-2 md:col-auto flex items-center justify-end gap-2"
     >
       <CallToAction
+        label="Contact Us On Whatsapp Call To Action"
         className="btn-neutral btn-circle p-0"
         href="https://api.whatsapp.com/send?phone=971564002204"
       >
         <Icon size="1.75em" icon="whatsapp-logo" />
       </CallToAction>
-      <CallToAction className="rounded-full" href="/#quote-form-section">
+      <CallToAction
+        label="Get Quote Call To Action"
+        className="rounded-full"
+        href="/#quote-form-section"
+      >
         <p class="">Get Quote</p>
       </CallToAction>
     </div>

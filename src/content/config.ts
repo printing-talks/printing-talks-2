@@ -24,9 +24,25 @@ const productCollection = defineCollection({
   })
 });
 
+const articleCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(), // Title is a string
+    author: z.string(), // Author is a string
+    publishDate: z.date(), // Publish Date must be a date
+    lastUpdated: z.date().optional(), // Last Updated is an optional date
+    tags: z.array(z.string()).optional(), // Tags is an optional array of strings
+    summary: z.string().optional(), // Summary is an optional string
+    thumbnailUrl: z.string().optional(), // Thumbnail URL is an optional string
+    category: z.enum(['Technology', 'Health', 'Business', 'Lifestyle', 'Entertainment', 'Science', 'Misc']).default('Misc'), // Category with default value if not provided
+  })
+});
+
+
 // 3. Export a single `collections` object to register your collection(s)
 //    This key should match your collection directory name in "src/content"
 export const collections = {
   'testimonials': testimonialCollection,
   'products': productCollection,
+  'articles': articleCollection,
 };

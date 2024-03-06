@@ -1,6 +1,7 @@
 ---
 import { type CollectionEntry, getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
 
 interface Props {
   entry: CollectionEntry<"products">;
@@ -29,7 +30,16 @@ const { entry } = Astro.props;
       class="container p-4 flex flex-col gap-10 md:flex-row mx-auto my-8 sm:my-16 min-h-[95svh]"
     >
       <div id="product-images" class="max-w-[800px]">
-        <img class="max-w-100% rounded-2xl" src={entry.data.img} alt="" />
+        <!-- <img class="max-w-100% rounded-2xl" src={entry.data.img} alt="" /> -->
+        <Image
+          src={entry.data.img}
+          alt={entry.data.img_alt || ""}
+          width="800"
+          height="800"
+          loading="eager"
+          decoding="async"
+          class="max-w-100% rounded-2xl"
+        />
       </div>
       <div
         id="product-info"

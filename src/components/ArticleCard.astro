@@ -1,0 +1,24 @@
+---
+// Import statements for any components or utilities you might need
+// Define props to make your component dynamic
+interface Props {
+  title: string;
+  description: string;
+  buttonText: string;
+  link: string; // Add a link prop for the article URL
+}
+
+const { title, description, buttonText, link } = Astro.props as Props;
+---
+
+<div class="card bg-base-100 shadow-xl h-full">
+  <div class="card-body flex flex-col justify-between">
+    <div>
+      <h2 class="card-title">{title}</h2>
+      <p>{description}</p>
+    </div>
+    <div class="card-actions justify-end mt-4">
+      <a href={link} class="btn btn-neutral">{buttonText}</a>
+    </div>
+  </div>
+</div>

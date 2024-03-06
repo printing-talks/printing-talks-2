@@ -3,7 +3,7 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "react",
-    "module": "commonjs",
+    "module": "ES6",
     "strict": false,
     "noImplicitAny": false,
     "strictNullChecks": false,

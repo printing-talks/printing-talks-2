@@ -1,0 +1,76 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { Image } from "astro:assets";
+
+interface Props {
+  entry: CollectionEntry<"articles">;
+  Content: any; // Represents the dynamically imported markdown content
+}
+
+export async function getStaticPaths() {
+  const articles = await getCollection("articles");
+  return articles.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await entry.render();
+---
+
+<BaseLayout title={entry.data.title} desc={entry.data.description}>
+  <header class="md:mt-14 mt-4 border-b border-solid border-base-darker">
+    <div class="header p-6 md:p-8 max-w-[83rem] mx-auto flex flex-col">
+      <h1 class="text-accent">{entry.data.title}</h1>
+      <p class="text-lg md:text-xl">
+        {entry.data.summary}
+      </p>
+    </div>
+  </header>
+  <article
+    class="article-content px-6 py-12 max-w-[88ch] mx-auto prose prose-lg text-gray-800"
+  >
+    <Content />
+  </article>
+</BaseLayout>
+<style>
+  /* Scoped styles for article content */
+  .article-content :global(h2) {
+    @apply text-2xl font-semibold mt-8 mb-4 text-gray-900;
+  }
+
+  .article-content :global(h3) {
+    @apply text-xl font-semibold mt-6 mb-3 text-gray-800;
+  }
+
+  .article-content :global(p) {
+    @apply text-base text-gray-700 leading-relaxed mb-6;
+  }
+
+  .article-content :global(a) {
+    @apply text-accent hover:text-accent-dark underline;
+  }
+
+  .article-content :global(ul),
+  .article-content :global(ol) {
+    @apply list-disc list-inside mb-6;
+  }
+
+  .article-content :global(blockquote) {
+    @apply border-l-4 border-accent pl-4 italic text-gray-900 bg-gray-100;
+  }
+
+  .article-content :global(code) {
+    @apply bg-gray-200 rounded px-2 py-1 text-sm;
+  }
+
+  .article-content :global(pre) {
+    @apply bg-gray-900 text-white p-4 overflow-x-auto rounded-lg;
+  }
+
+  .article-content :global(img) {
+    @apply mx-auto my-8;
+  }
+</style>
